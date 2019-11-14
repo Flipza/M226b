@@ -16,7 +16,7 @@ Java 11.0.5
 
 ### Arbeitsjournal
 
-##### Tag 1
+##### Tag 1 - 14.11.2019
 - Gruppe gebildet und Funktionen erteilt
 - Projektbeschrieb analysiert und besprochen
 - Nötige Programme installiert
