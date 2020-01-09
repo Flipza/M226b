@@ -1,0 +1,43 @@
+package ch.modul226b.flixbus;
+
+public class Busbahnhof {
+
+	private Gate[] gates;
+	private String name;
+
+	public Busbahnhof() {
+		this.name = "Zürich";
+		this.gates = new Gate[10];
+		
+		// vier nationale Gates
+		gates[0] = new Gate(1, 0, 0);
+		gates[1] = new Gate(2, 0, 0);
+		gates[2] = new Gate(3, 0, 0);
+		gates[3] = new Gate(4, 0, 0);
+		
+		// 2 kleine internationale Gates
+		gates[4] = new Gate(5, 1, 0);
+		gates[5] = new Gate(6, 1, 0);
+		
+		// 2 grosse internationale Gates
+		gates[6] = new Gate(7, 1, 0);
+		gates[7] = new Gate(8, 1, 0);
+		gates[8] = new Gate(9, 1, 0);
+		gates[9] = new Gate(10, 1, 0);
+		
+	}
+
+	public int ankunft(Flug flug) {
+
+	}
+
+	public void abfahrt(int gateNummer) {
+
+	}
+	
+	public Gate(int nummer, int typ, int groesse) 
+	super();
+	this.typ = typ;
+	this.groesse = groesse;
+	this.nummer = nummer;
+}

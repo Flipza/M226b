@@ -1,0 +1,8 @@
+package ch.modul226b.flixbus;
+
+public class Fahrt {
+
+	public boolean istNational() {
+		return (nummer < 1000);
+	}
+}

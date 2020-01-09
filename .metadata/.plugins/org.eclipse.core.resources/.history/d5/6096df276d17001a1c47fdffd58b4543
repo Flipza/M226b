@@ -1,0 +1,29 @@
+package ch.modul226b.flixbus;
+
+public class Gate {
+
+	public static final int KLEIN = 0;
+	public static final int GROSS = 1;
+	public static final int NATIONAL = 0;
+	public static final int INTERNATIONAL = 1;
+	
+	public Gate(int nummer, int typ, int groesse) {
+	super();
+	this.typ = typ;
+	this.groesse = groesse;
+	this.nummer = nummer;
+	}
+	
+	public boolean istFrei() {
+		return (this.flug == null);
+	}
+	
+	public Bus getBus() {
+		if (this.fahrt == null) {
+			return null;
+		}
+		
+		return fahrt.getBus();
+	}
+	
+}

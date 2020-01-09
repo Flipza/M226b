@@ -1,0 +1,10 @@
+package ch.modul225b.utils;
+
+public class ConsoleReader2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

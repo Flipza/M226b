@@ -1,0 +1,45 @@
+
+import java.util.Scanner;
+
+public class Starter extends NewsFeed{
+
+	/**
+	 * @param args
+	 */
+	{
+		MessagePost message = new MessagePost("White Rabbit", "Oh dear, oh dear, I shall be late!");
+		PhotoPost photo = new PhotoPost("Alice Wonderland", "RabbitHole.jpg", "Down the rabbit hole :)");
+
+		message.addComment("Your watch is exactly two days slow.");
+		photo.like();
+
+		NewsFeed news = new NewsFeed();
+
+		/**
+		 * news.addPost( message ); news.addPost( photo ); news.show();
+		 */
+		news.show();
+
+	}
+
+	private NewsFeed newsFeed = new NewsFeed();
+
+	public static void main(String[] args) {
+		Starter app = new Starter();
+		app.run();
+	}
+
+
+
+	/**
+	 * Show the news feed. Currently: print the news feed details to the terminal.
+	 * (To do: replace this later with display in web browser.)
+	 */
+
+	public void showPosts() {
+
+		System.out.print(posts);
+		showPosts();
+
+	}
+}

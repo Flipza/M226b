@@ -1,0 +1,22 @@
+package ch.modul225b.utils;
+
+import java.io.BufferedReader;
+import java.io.File;
+
+public class ConsoleReader {
+
+	BufferedReader reader;
+	String line;
+	
+	File dataFile = new File("myFile.txt");
+	try {
+		reader = new BufferedReader( new FileReader(dataFile));
+		while((line = reader.readLine()) .= null) {
+			...
+		}
+		reader.close();
+	}
+	catch (IOException e) {
+		...
+	}
+}
