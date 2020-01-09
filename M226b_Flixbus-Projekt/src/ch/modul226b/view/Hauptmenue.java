@@ -1,6 +1,11 @@
 package ch.modul226b.view;
+import ch.modul226b.model.*;
+
+private Busbahnhof busbahnhof;
+
 
 public class Hauptmenue {
+	busbahnhof = new Busbahnhof();
 
 	private void anzeigen() {
 		System.out.println();
