@@ -2,8 +2,6 @@ package ch.modul226b.view;
 
 import ch.modul226b.utils.ConsoleReader;
 
-
-
 public class Hauptmenue {
 
 	private void anzeigen() {
