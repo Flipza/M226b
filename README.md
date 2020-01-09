@@ -20,3 +20,4 @@ Java 11.0.5
 - Gruppe gebildet und Funktionen erteilt
 - Projektbeschrieb analysiert und besprochen
 - Nötige Programme installiert
+- Grundlegende Klassen implementiert
