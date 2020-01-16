@@ -27,7 +27,7 @@ public class Busbahnhof {
 		
 	}
 
-	public int ankunft(Fahrt fahrt) throws NoGateAvailableException {
+	public int ankunft(Fahrt fahrt) {
 		for (short i = 0; i < 10; i++) {		// Schleife über alle Gates
 			if (gates[i].istFrei()) {			// nur freie Gates
 				if (fahrt.istNational()) {		// nationaler Flug passt immer
@@ -36,7 +36,7 @@ public class Busbahnhof {
 				}
 				else {							// internationaler Flug
 					if (fahrt.getBus().istGrossraum()) {	// Grossraumbus
-						if (gates[i] instanceof InternationalesGate && ((InternationalesGate )gates[i]).getGroesse() == InternationalesGate.GROSS) {
+						if (gates[i].getGroesse() == Gate.GROSS) {
 							gates[i].ankunft(fahrt);
 							return i+1;			// Gate ist gross -> OK, passt
 						}
@@ -47,38 +47,12 @@ public class Busbahnhof {
 					}
 				}
 			}
-			throw new NoGateAvailableException();
+			return -1;
 		}
 	}
 
 	public void abfahrt(int gateNummer) {
 
-	}
-	
-	public Gate getGate(int gateNummer) throws InvalidGateNumberException {
-		try {
-			return gates[gateNummer];
-		}
-		catch (ArrayIndexOutOfBoundsException ex) {
-			throw new InvalidGateNumberException();
-		}
-	}
-	
-	
-	private Gate freiesGateSuchen(Fahrt fahrt) throws NoGateAvailableException {
-		for (short i = 0; i < gates.length; i++) {
-			if (gates[i].istFrei()) {
-				if (fahrt.istNational()) {
-					return gates[i];
-				}
-				else {
-					if (gates[i].getGroesse() == InternationalesGate.GROSS)| .fahrt.getBus().istGrossraum()) {
-						return gates[i];
-					}
-				}
-			}
-		}
-		throw new NoGateAvailableException();
 	}
 	
 	

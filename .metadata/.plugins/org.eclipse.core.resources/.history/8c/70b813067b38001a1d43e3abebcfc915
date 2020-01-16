@@ -55,16 +55,6 @@ public class Busbahnhof {
 
 	}
 	
-	public Gate getGate(int gateNummer) throws InvalidGateNumberException {
-		try {
-			return gates[gateNummer];
-		}
-		catch (ArrayIndexOutOfBoundsException ex) {
-			throw new InvalidGateNumberException();
-		}
-	}
-	
-	
 	private Gate freiesGateSuchen(Fahrt fahrt) throws NoGateAvailableException {
 		for (short i = 0; i < gates.length; i++) {
 			if (gates[i].istFrei()) {
@@ -80,6 +70,5 @@ public class Busbahnhof {
 		}
 		throw new NoGateAvailableException();
 	}
-	
 	
 }

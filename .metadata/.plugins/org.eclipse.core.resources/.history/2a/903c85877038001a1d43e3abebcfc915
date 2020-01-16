@@ -2,37 +2,20 @@ package ch.modul226b.model;
 
 public class Gate {
 
-	// Instanzvariablen
-	private int nummer;
-	private Fahrt fahrt;
-	
 	public static final int KLEIN = 0;
 	public static final int GROSS = 1;
 	public static final int NATIONAL = 0;
 	public static final int INTERNATIONAL = 1;
 	
-	public Gate(int nummer) {
-		this.nummer = nummer;
-	}
-	
-	public void ankunft(Bus bus) {
-		this.fahrt = fahrt;
-	}
-	
-	public void abfahrt() {
-		this.fahrt = null;
+	public Gate(int nummer, int typ, int groesse) {
+	super();
+	this.typ = typ;
+	this.groesse = groesse;
+	this.nummer = nummer;
 	}
 	
 	public boolean istFrei() {
 		return (this.fahrt == null);
-	}
-	
-	public int getFahrtnummer() {
-		return nummer;
-	}
-	
-	public Fahrt getFahrt() {
-		return fahrt;
 	}
 	
 	public Bus getBus() {

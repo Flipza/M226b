@@ -67,12 +67,11 @@ public Hauptmenue() {
 	private void ankunft() {
 		System.out.println("\n\n\nAnkunft...\n\n");
 		Fahrt fahrt = fahrtDatenBeschaffen();
-		try {
 		int gateNummer = busbahnhof.ankunft(fahrt);
-		System.out.println("Maschine ist an Gate" + gateNummer + " gelandet");
-		}
-		catch(NoGateAvailableException ex) {
-			System.out.println(ex.getMessage());
+		if (gateNummer >= 0) {
+			System.out.println("Maschine ist an Gate" + gateNummer + " gelandet");
+		} else {
+			System.out.println("ERROR Kein freies Gate gefunden, Fahrt muss umgeleitet werden");
 		}
 	}
 
@@ -82,43 +81,17 @@ public Hauptmenue() {
 
 	private void gateDatenAnzeigen() {
 		System.out.println("Gate Daten Anzeigen...");
-		int gateNummer = ConsoleReader.readInteger("Gatenummer eingeben");
-		try {
-			Gate gate = busbahnhof.getGate(gateNummer);
-			if (gate.istFrei()) {
-				System.out.println("Gate ist frei\n\n\n");
-				return;
-			}
-			if (gate instanceof NationalesGate) {
-				System.out.println("Nationales Gate");
-				System.out.println("---------------");
-			}
-			else {
-				System.out.println("Internationales Gate");
-				System.out.println("--------------------");
-				System.out.println(
-						gate.getGroesse() == InternationalesGate.GROSS 
-						? "Grosses Gate" 
-						: "kleines Gate");
-			}
-			System.out.println("Flugnummer: " + gate.getFahrt().getNummer());
-			System.out.println("Bustyp")
-			+ (gate.getBus().getTyp() == Bus.ELEKTRO ? "Elektro" : "benzin"));
-		}
-		catch (InvalidGateNumberException ex) {
-			System.out.println(ex.getMessage());
-		}
 	}
 
 	private Fahrt fahrtDatenBeschaffen() {
-		Fahrt fahrt = new Fahrt();
+		Fahrt fart = new Fahrt();
 		System.out.println();
 		System.out.println();
 		System.out.println("Bitte Flugdaten eingeben");
 		System.out.println("------------------------");
 		fahrt.setNummer(ConsoleReader.readInteger("Fahrtnummer"));
-		fahrt.setAnkunftzeit(ConsoleReader.readString("Ankunftzeit"));
-		fahrt.setAbfahrtzeit(ConsoleReader.readString("Abfahrtzeit"));
+		fahrt.setAnkunft(ConsoleReader.readString("Ankunftszeit"));
+		fahrt.setAbfahrt(ConsoleReader.readString("Abfahrtszeit"));
 		
 		fahrt.setBus(busDatenBeschaffen());
 		return fahrt;

@@ -6,4 +6,6 @@
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
     <fullyQualifiedTypeName name="ch.modul226b.view.Hauptmenue"/>
+    <fullyQualifiedTypeName name="ch.modul226b.utils.ConsoleReader"/>
+    <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 </qualifiedTypeNameHistroy>
