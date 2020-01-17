@@ -30,11 +30,11 @@ public class Busbahnhof {
 	public int ankunft(Fahrt fahrt) throws NoGateAvailableException {
 		for (short i = 0; i < 10; i++) {		// Schleife über alle Gates
 			if (gates[i].istFrei()) {			// nur freie Gates
-				if (fahrt.istNational()) {		// nationaler Flug passt immer
+				if (fahrt.istNational()) {		// nationale fahrt passt immer
 					gates[i].ankunft(fahrt);
 					return i + 1;
 				}
-				else {							// internationaler Flug
+				else {							// internationale fahrt
 					if (fahrt.getBus().istGrossraum()) {	// Grossraumbus
 						if (gates[i] instanceof InternationalesGate && ((InternationalesGate )gates[i]).getGroesse() == InternationalesGate.GROSS) {
 							gates[i].ankunft(fahrt);

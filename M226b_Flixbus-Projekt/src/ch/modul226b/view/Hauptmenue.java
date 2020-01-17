@@ -69,7 +69,7 @@ public Hauptmenue() {
 		Fahrt fahrt = fahrtDatenBeschaffen();
 		try {
 		int gateNummer = busbahnhof.ankunft(fahrt);
-		System.out.println("Maschine ist an Gate" + gateNummer + " gelandet");
+		System.out.println("Fahrzeug ist am Gate" + gateNummer + " angekommen");
 		}
 		catch(NoGateAvailableException ex) {
 			System.out.println(ex.getMessage());
@@ -101,7 +101,7 @@ public Hauptmenue() {
 						? "Grosses Gate" 
 						: "kleines Gate");
 			}
-			System.out.println("Flugnummer: " + gate.getFahrt().getNummer());
+			System.out.println("Busnummer: " + gate.getFahrt().getNummer());
 			System.out.println("Bustyp")
 			+ (gate.getBus().getTyp() == Bus.ELEKTRO ? "Elektro" : "benzin"));
 		}
@@ -114,7 +114,7 @@ public Hauptmenue() {
 		Fahrt fahrt = new Fahrt();
 		System.out.println();
 		System.out.println();
-		System.out.println("Bitte Flugdaten eingeben");
+		System.out.println("Bitte Fahrtdaten eingeben");
 		System.out.println("------------------------");
 		fahrt.setNummer(ConsoleReader.readInteger("Fahrtnummer"));
 		fahrt.setAnkunftzeit(ConsoleReader.readString("Ankunftzeit"));
@@ -126,7 +126,7 @@ public Hauptmenue() {
 	
 	private Bus busDatenBeschaffen() {
 		Bus bus = new Bus();
-		bus.setTyp(ConsoleReader.readInteger("Flugzeugtyp (0=Elektro, 1=Kerosin)"));
+		bus.setTyp(ConsoleReader.readInteger("Fahrzeugtyp (0=Elektro, 1=Kerosin)"));
 		bus.setKapazitaet(ConsoleReader.readInteger("Passagieranzahl"));
 		bus.setNachtankzeit(ConsoleReader.readString("Nachtankzeit"));
 		return bus;
