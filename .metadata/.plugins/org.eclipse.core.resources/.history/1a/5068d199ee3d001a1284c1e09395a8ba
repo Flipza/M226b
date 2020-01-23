@@ -1,0 +1,16 @@
+package ch.modul226b.model;
+
+public class Fahrt {
+
+	// Instanzvariablen
+		private int nummer;
+		private String startzeit;
+		private String landezeit;
+		private Bus bus;
+		
+		
+	
+	public boolean istNational() {
+		return (nummer < 1000);
+	}
+}

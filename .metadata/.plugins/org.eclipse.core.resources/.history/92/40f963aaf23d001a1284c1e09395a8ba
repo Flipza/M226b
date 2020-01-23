@@ -1,0 +1,111 @@
+package ch.modul226b.model;
+
+/**
+ * Diese Klasse verwaltet einen einfachen Busbahnhof mit verschiedenen Gates
+ * 
+ * @author Philipp
+ * @version V1.0
+ */
+
+public class Busbahnhof {
+
+	/**
+	 * Die Liste der Gates
+	 */
+	private Gate[] gates;
+
+	/**
+	 * Name des Busbahnhofs
+	 */
+	private String name;
+
+	/**
+	 * Defaultkonstruktor fuer den Flughafen
+	 */
+	public Busbahnhof() {
+		this.name = "Zürich";
+		this.gates = new Gate[10];
+
+		// vier nationale Gates
+		gates[0] = new NationalesGate(1);
+		gates[1] = new NationalesGate(2);
+		gates[2] = new NationalesGate(3);
+		gates[3] = new NationalesGate(4);
+
+		// zwei kleine internationale Gates
+		gates[4] = new InternationalesGate(5, InternationalesGate.KLEIN);
+		gates[5] = new InternationalesGate(6, InternationalesGate.KLEIN);
+
+		// vier grosse internationale Gates
+		gates[6] = new InternationalesGate(7, InternationalesGate.GROSS);
+		gates[7] = new InternationalesGate(8, InternationalesGate.GROSS);
+		gates[8] = new InternationalesGate(9, InternationalesGate.GROSS);
+		gates[9] = new InternationalesGate(10, InternationalesGate.GROSS);
+
+	}
+
+	/**
+	 * Menueaktion ankunft
+	 * 
+	 * @param fahrt die Fahrt, welche sich zur Ankunft angemeldet hat
+	 * @return Nummer des Gates, an welchem der Bus parkiert hat
+	 * @throws NoGateAvailableException
+	 */
+	public int ankunft(Fahrt fahrt) throws NoGateAvailableException {
+		Gate gate = freiesGateSuchen(fahrt);
+		gate.ankunft(fahrt);
+		return gate.getGatenummer();
+	}
+
+	/**
+	 * Sucht fuer den gemeldeten Flug ein passendes freies Gate
+	 * 
+	 * Die Methode geht einfach die Liste der Gates durch und gibt das erste freie
+	 * passende Gate zurueck. Es kann daher sein, dass ein kleines Flugzeug an einem
+	 * grossen Gate andockt, weil dieses in der Liste zuerst gefunden wird, obwohl
+	 * auch ein freies kleines Gate vorhanden waere
+	 * 
+	 * @param flug der zu landende Flug
+	 * @return das gefundene passende Gate
+	 * @throws NoGateAvailableException
+	 */
+	private Gate freiesGateSuchen(Fahrt fahrt) throws NoGateAvailableException {
+		for (short i = 0; i < gates.length; i++) {
+			if (gates[i].istFrei()) {
+				if (fahrt.istNational()) {
+					return gates[i];
+				} else {
+					if (gates[i].getGroesse() == InternationalesGate.GROSS || !fahrt.getBus().istGrossraum()) {
+						return gates[i];
+					}
+				}
+			}
+		}
+		throw new NoGateAvailableException();
+	}
+
+	/**
+	 * Referenz auf ein Gate abfragen
+	 * 
+	 * @param gateNummer Eingabe der Gatenummer
+	 * @return Das Gate mit der gegebenen Nummer
+	 * @throws InvalidGateNumberException
+	 */
+	public Gate getGate(int gateNummer) throws InvalidGateNumberException {
+		try {
+			// Gatenummer laufen von 1-10, intern aber von 0-9
+			return gates[gateNummer - 1];
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			throw new InvalidGateNumberException();
+		}
+	}
+
+	/**
+	 * Liefert den Busbahnhofnamen
+	 * 
+	 * @return Name des Busbahnhofes
+	 */
+	public String getName() {
+		return this.name;
+	}
+}

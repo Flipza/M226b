@@ -1,0 +1,115 @@
+package ch.modul226b.model;
+
+/**
+ * Ein Gate ist die zentrale Andockstelle fuer Busse und Fahrten. 
+ * Jeder Busbahnhof besitzt mindestens ein Gate.<br />
+ * 
+ * Diese Klasse ist abstract, da Gates erst Sinn machen, wenn man sie
+ * genauer spezifiziert (in unserem Fall national/international)<br />
+ * 
+ * An einem Gate werden zwar Busse parkiert, aber normalerweise spricht
+ * man von Fahrt, der am Gate angeschrieben ist. Daher kennt das Gate nur die Fahrt
+ * und nicht direkt das Flugzeug
+ * 
+ * @author Philipp
+ * @version V1.0
+ *
+ */
+
+public abstract class Gate {
+
+	// Instanzvariablen
+	
+	/**
+	 * Die Nummer des Gates
+	 */
+	private int nummer;
+	
+	/**
+	 * Referenz auf den am Gate gelandeten Flug
+	 */
+	
+	private Fahrt fahrt;
+	
+	/**
+	 * Ein Gate kann nur garade mit Nummer erstellt werden
+	 * 
+	 * @param nummer Die Gatenummer
+	 */
+	
+	public static final int KLEIN = 0;
+	public static final int GROSS = 1;
+	public static final int NATIONAL = 0;
+	public static final int INTERNATIONAL = 1;
+	
+	public Gate(int nummer) {
+		super();
+		this.nummer = nummer;
+	}
+	
+	/**
+	 * Ein Flugzeug wird gelandet, indem der Flug am Gate angeschrieben wird
+	 *  
+	 * @param flug Der Flug
+	 */
+	
+	public void ankunft(Bus bus) {
+		this.fahrt = fahrt;
+	}
+	
+	/**
+	 * Starten heisst, dass am Gate kein Flug mehr angeschrieben ist
+	 */
+
+	public void abfahrt() {
+		this.fahrt = null;
+	}
+	
+	/**
+	 * Ist das Gate gerade frei oder belegt?
+	 * 
+	 * @return true, gibt true zurueck, wenn Gate frei ist, false bei belegtem Gate
+	 */
+	public boolean istFrei() {
+		return this.fahrt == null;
+	}
+	
+	/**
+	 * Abfrage der Gatenummer
+	 * 
+	 * @return Gatenummer
+	 */
+	public int getGatenummer() {
+		return nummer;
+	}
+	
+	/**
+	 * Abfrage der Groesse des Gates
+	 * 
+	 * @return Groesse des Gates
+	 */
+	public abstract int getGroesse();
+	
+	/**
+	 * Abfrage der Fluginfo
+	 * 
+	 * @return Referenz auf den am Gate liegenden Flug, null wenn Gate nicht belegt
+	 */
+	public Fahrt getFahrt() {
+		return fahrt;
+	}
+	
+	/**
+	 * Abfrage des Flugzeugs am Gate.
+	 * 
+	 * @return Referenz auf Flugzeug oder null, wenn Gate nicht belegt ist
+	 */
+	public Bus getBus() {
+		if (this.fahrt == null) {
+			return null;
+		}
+		
+		return fahrt.getBus();
+	}
+	
+}

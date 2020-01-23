@@ -1,13 +1,28 @@
 package ch.modul226b.view;
+
 import ch.modul226b.model.*;
 import ch.modul226b.utils.ConsoleReader;
 
-
-
-
-
+/**
+ * Diese Klasse implementiert die (zeichenorientierte) Benutzerschnittstelle.
+ * Sie dient auch zum Start der Applikation<br />
+ * 
+ * Wenn eine Grafische Oberflaeche gewuenscht wird, kann einfach diese Klasse
+ * ersetzt werden.
+ * 
+ * @author philipp
+ * @version V1.0
+ *
+ */
 
 public class Hauptmenue {
+
+	/**
+	 * Die main-Methode dient zum Start der Appikation. Sie instanziiert das
+	 * Hauptmenue und wertet in einer Schleife die Benutzeraktionen im Menue aus.
+	 * 
+	 * @param args Standard Kommandozeilenparameter, werden nicht weiter verwendet
+	 */
 
 	public static void main(String[] args) {
 		Hauptmenue menue = new Hauptmenue();
@@ -17,29 +32,29 @@ public class Hauptmenue {
 		System.out.println();
 		System.out.println("Besten Dank und auf Widersehen.");
 	}
-	
-private Busbahnhof busbahnhof;
 
-public Hauptmenue() {
-	busbahnhof = new Busbahnhof();
+	/**
+	 * Die Benutzerschnittstelle verwaltet diesen Flugplatz
+	 */
 
+	private Busbahnhof busbahnhof;
+
+	/**
+	 * Konstruktor <br />
+	 * Bei der Konstruktion der Meuesteuerung wird auch gleich der Flughafen gebaut
+	 */
+
+	public Hauptmenue() {
+		busbahnhof = new Busbahnhof();
 
 	}
 
-
-	private void anzeigen() {
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println("Busstation Scheduler Hauptmenü");
-		System.out.println("==============================");
-		System.out.println();
-		System.out.println("1 Ankunft");
-		System.out.println("2 Abfahrt");
-		System.out.println("3 Gatedaten");
-		System.out.println();
-		System.out.println("4 Ende");
-	}
+	/**
+	 * Anzeige und Auswertung des Hauptmenues
+	 *
+	 * @return gibt true zurueck, wenn das Menue nocheinmal angezeigt werden soll.
+	 *         Bei false will der Benutzer die Applikation beenden
+	 */
 
 	public boolean aktion() {
 		while (true) {
@@ -64,20 +79,57 @@ public Hauptmenue() {
 		}
 	}
 
+	/**
+	 * Dient nur der reinen Anzeige der Menueoptionen
+	 */
+
+	private void anzeigen() {
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("Busstation Scheduler Hauptmenü");
+		System.out.println("==============================");
+		System.out.println();
+		System.out.println("1 Ankunft");
+		System.out.println("2 Abfahrt");
+		System.out.println("3 Gatedaten");
+		System.out.println();
+		System.out.println("4 Ende");
+	}
+
+	/**
+	 * Der Benutzer hat "landen" gewaehlt. Diese Methode organisert die Abfrage der
+	 * Flugdaten und die Suche nach einem freien Gate
+	 */
+
 	private void ankunft() {
 		System.out.println("\n\n\nAnkunft...\n\n");
 		Fahrt fahrt = fahrtDatenBeschaffen();
 		try {
-		int gateNummer = busbahnhof.ankunft(fahrt);
-		System.out.println("Fahrzeug ist am Gate" + gateNummer + " angekommen");
-		}
-		catch(NoGateAvailableException ex) {
+			int gateNummer = busbahnhof.ankunft(fahrt);
+			System.out.println("Fahrzeug ist am Gate" + gateNummer + " angekommen");
+		} catch (NoGateAvailableException ex) {
 			System.out.println(ex.getMessage());
 		}
 	}
 
+	/**
+	 * Diese Methode ...
+	 */
+
 	private void abfahrt() {
-		System.out.println("Abfahrt...");
+		System.out.println("\n\n\nstarten...\n\n");
+		int gateNummer = ConsoleReader.readInteger("Gatenummer eingeben");
+		try {
+			Gate gate = busbahnhof.getGate(gateNummer);
+			if (gate.istFrei()) {
+				System.out.println("Das Gate ist nicht belegt, es gibt nichts zu starten!");
+			} else {
+				System.out.println("Abfahrt Fahrt " + gate.getFahrt().getNummer());
+			}
+		} catch (InvalidGateNumberException ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	private void gateDatenAnzeigen() {
@@ -92,20 +144,17 @@ public Hauptmenue() {
 			if (gate instanceof NationalesGate) {
 				System.out.println("Nationales Gate");
 				System.out.println("---------------");
-			}
-			else {
+			} else {
 				System.out.println("Internationales Gate");
 				System.out.println("--------------------");
-				System.out.println(
-						gate.getGroesse() == InternationalesGate.GROSS 
-						? "Grosses Gate" 
-						: "kleines Gate");
+				System.out.println(gate.getGroesse() == InternationalesGate.GROSS ? "Grosses Gate" : "kleines Gate");
 			}
-			System.out.println("Busnummer: " + gate.getFahrt().getNummer());
-			System.out.println("Bustyp")
-			+ (gate.getBus().getTyp() == Bus.ELEKTRO ? "Elektro" : "benzin"));
-		}
-		catch (InvalidGateNumberException ex) {
+			System.out.println("Fahrtnummer: " + gate.getFahrt().getNummer());
+			System.out.println("Ankunftzeit: " + gate.getFahrt().getAnkunftzeit());
+			System.out.println("Abfahrtzeit: " + gate.getFahrt().getAbfahrtzeit());
+			System.out.println("Bustyp: " + (gate.getBus().getTyp() == Bus.BENZIN ? "Benzin" : "elektro"));
+			System.out.println("Kapazität: " + gate.getBus().getKapazitaet());
+		} catch (InvalidGateNumberException ex) {
 			System.out.println(ex.getMessage());
 		}
 	}
@@ -119,17 +168,17 @@ public Hauptmenue() {
 		fahrt.setNummer(ConsoleReader.readInteger("Fahrtnummer"));
 		fahrt.setAnkunftzeit(ConsoleReader.readString("Ankunftzeit"));
 		fahrt.setAbfahrtzeit(ConsoleReader.readString("Abfahrtzeit"));
-		
+
 		fahrt.setBus(busDatenBeschaffen());
 		return fahrt;
 	}
-	
+
 	private Bus busDatenBeschaffen() {
 		Bus bus = new Bus();
-		bus.setTyp(ConsoleReader.readInteger("Fahrzeugtyp (0=Elektro, 1=Kerosin)"));
+		bus.setTyp(ConsoleReader.readInteger("Fahrzeugtyp (0=Elektro, 1=Benzin)"));
 		bus.setKapazitaet(ConsoleReader.readInteger("Passagieranzahl"));
 		bus.setNachtankzeit(ConsoleReader.readString("Nachtankzeit"));
 		return bus;
 	}
-	
+
 }

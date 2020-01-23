@@ -1,0 +1,68 @@
+package ch.modul226b.model;
+
+/**
+ * Diese Klasse modelliert ein Flugzeug
+ * 
+ * @author ruggiero
+ * @version V1.0
+ *
+ */
+public class Bus {
+	
+	/**
+	 * Bustyp Elektrofahrzeug
+	 */
+	public static final int ELEKTRO = 0;
+	
+	/**
+	 * Bustyp Benzinfahrzeug
+	 */
+	public static final int BENZIN = 1;
+	
+	/**
+	 * Passagierkapazitaet des Busses
+	 */
+	private int kapazitaet;
+	
+	/**
+	 * Der Typ des Busses (Elektro oder Benzin)
+	 */
+	private int typ;
+	
+	/**
+	 * Wie lange dauert es, den Bus neu aufzutanken / aufzuladen
+	 */
+	private String nachtankzeit;
+	
+	/**
+	 * Handelt es sich um einen grossen Bus?
+	 * 
+	 * @return true, wenn grosser Bus, sonst false
+	 */
+	public boolean istGrossraum() {
+		return kapazitaet >= 20;
+	}
+	
+	/* Die einfachen Zugriffsmethoden werden nicht mit JavaDoc kommentiert */
+	
+	public int getKapazitaet() {
+		return kapazitaet;
+	}
+	public void setKapazitaet(int kapazitaet) {
+		this.kapazitaet = kapazitaet;
+	}
+	public String getNachtankzeit() {
+		return nachtankzeit;
+	}
+	public void setNachtankzeit(String nachtankzeit) {
+		this.nachtankzeit = nachtankzeit;
+	}
+	public int getTyp() {
+		return typ;
+	}
+	public void setTyp(int typ) {
+		this.typ = typ;
+	}
+	
+	
+}

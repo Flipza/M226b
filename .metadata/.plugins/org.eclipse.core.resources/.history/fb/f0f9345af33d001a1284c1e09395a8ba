@@ -1,0 +1,186 @@
+package ch.modul226.airport.view;
+
+import ch.modul226.airport.model.*;
+
+/**
+ * Diese Klasse implementiert die (zeichenorientierte) Benutzerschnittstelle.
+ * Sie dient auch zum Start der Applikation<br />
+ * 
+ * Wenn eine Grafische Oberflaeche gewuenscht wird, kann einfach diese Klasse ersetzt
+ * werden.
+ * 
+ * @author ruggiero
+ * @version V1.0
+ *
+ */
+public class Hauptmenue {
+
+	/** 
+	 * Die main-Methode dient zum Start der Appikation. Sie instanziiert das 
+	 * Hauptmenue und wertet in einer Schleife die Benutzeraktionen im Menue
+	 * aus.
+	 * 
+	 * @param args Standard Kommandozeilenparameter, werden nicht weiter verwendet
+	 */
+	public static void main(String[] args) {		
+		Hauptmenue menue = new Hauptmenue();
+		while (menue.aktion()) {
+			// einfach immer wieder anzeigen
+		}
+		System.out.println();
+		System.out.println("Besten Dank und auf Wiedersehen.");
+	}
+
+	/**
+	 * Die Benutzerschnittstelle verwaltet diesen Flugplatz
+	 */
+	private Flughafen flughafen;
+	
+	/**
+	 * Konstruktor <br />
+	 * Bei der Konstruktion der Meuesteuerung wird auch gleich 
+	 * der Flughafen gebaut
+	 */
+	public Hauptmenue() {
+		flughafen = new Flughafen();
+	}
+
+	/**
+	 * Anzeige und Auswertung des Hauptmenues
+	 *
+	 * @return gibt true zurueck, wenn das Menue nocheinmal angezeigt werden soll. Bei false will der Benutzer die Applikation beenden 
+	 */
+	public boolean aktion() {
+		while (true) {
+			
+			anzeigen();
+
+			int eingabe = ConsoleReader.readInteger("Ihre Wahl");
+			switch (eingabe) {
+			case 1: 
+				landen(); 
+				return true;
+			case 2: 
+				starten(); 
+				return true;
+			case 3: 
+				gateDatenAnzeigen(); 
+				return true;
+			case 4: 
+				return false;
+			default:
+				System.out.println("Ungueltige Wahl");
+			}
+		}
+
+	}
+	
+	/**
+	 * Dient nur der reinen Anzeige der Menueoptionen
+	 */
+	private void anzeigen() {
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("Airport Scheduler Hauptmenü");
+		System.out.println("===========================");
+		System.out.println();
+
+		System.out.println("1 Landen");
+		System.out.println("2 Starten");
+		System.out.println("3 Gatedaten");
+		System.out.println();
+		System.out.println("4 Ende");
+	}
+	
+	/**
+	 * Der Benutzer hat "landen" gewaehlt. Diese Methode organisert
+	 * die Abfrage der Flugdaten und die Suche nach einem freien Gate
+	 */
+	private void landen() {
+		System.out.println("\n\n\nLanden...\n\n");
+		Flug flug = flugDatenBeschaffen();
+		try {
+			int gateNummer = flughafen.landen(flug); 
+			System.out.println("Maschine ist an Gate " + gateNummer + " gelandet");
+		}
+		catch(NoGateAvailableException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	/**
+	 * Diese Methode 
+	 */
+	private void starten() {
+		System.out.println("\n\n\nstarten...\n\n");
+		int gateNummer = ConsoleReader.readInteger("Gatenummer eingeben");
+		try {
+			Gate gate = flughafen.getGate(gateNummer);
+			if (gate.istFrei()) {
+				System.out.println("Das Gate ist nicht belegt, es gibt nichts zu starten!");
+			}
+			else {
+				System.out.println("Take-off Flug " + gate.getFlug().getNummer());
+			}
+		}
+		catch (InvalidGateNumberException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	private void gateDatenAnzeigen() {
+		System.out.println("\n\n\nGate Daten anzeigen...\n\n");
+		int gateNummer = ConsoleReader.readInteger("Gatenummer eingeben");
+		try {
+			Gate gate = flughafen.getGate(gateNummer);
+			if (gate.istFrei()) {
+				System.out.println("Gate ist frei\n\n\n");
+				return;
+			}
+			if (gate instanceof NationalesGate) {
+				System.out.println("Nationales Gate");
+				System.out.println("---------------");
+			}
+			else {
+				System.out.println("Internationales Gate");
+				System.out.println("--------------------");
+				System.out.println(gate.getGroesse() == InternationalesGate.GROSS ? "Grosses Gate" : "kleines Gate"); 
+			}
+			System.out.println("Flugnummer: " + gate.getFlug().getNummer());
+			System.out.println("Landezeit: " + gate.getFlug().getLandezeit());
+			System.out.println("Startzeit: " + gate.getFlug().getStartzeit());
+			System.out.println("Flugzeugtyp: " + (gate.getFlugzeug().getTyp() == Flugzeug.JET ? "Jet" : "prop"));
+			System.out.println("Kapazität: " + gate.getFlugzeug().getKapazitaet());
+			
+			
+
+		}
+		catch (InvalidGateNumberException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	private Flug flugDatenBeschaffen() {
+		Flug flug = new Flug();
+		System.out.println();
+		System.out.println();
+		System.out.println("Bitte Flugdaten eingeben");
+		System.out.println("------------------------");
+		flug.setNummer(ConsoleReader.readInteger("Flugnummer"));
+		flug.setLandezeit(ConsoleReader.readString("Landezeit"));
+		flug.setStartzeit(ConsoleReader.readString("Startzeit"));
+		
+		flug.setFlugzeug(flugzeugDatenBeschaffen());
+		return flug;
+	}
+	
+	private Flugzeug flugzeugDatenBeschaffen() {
+		Flugzeug flugzeug = new Flugzeug();
+		flugzeug.setTyp(ConsoleReader.readInteger("Flugzeugtyp (0=Prop, 1=Jet)"));
+		flugzeug.setKapazitaet(ConsoleReader.readInteger("Passagierzahl"));
+		flugzeug.setNachtankzeit(ConsoleReader.readString("Nachtankzeit"));
+		return flugzeug;
+	}
+	
+}
