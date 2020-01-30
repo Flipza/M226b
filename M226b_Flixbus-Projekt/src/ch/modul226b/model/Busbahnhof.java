@@ -20,7 +20,7 @@ public class Busbahnhof {
 	private String name;
 
 	/**
-	 * Defaultkonstruktor fuer den Flughafen
+	 * Defaultkonstruktor fuer den Busbahnhof
 	 */
 	public Busbahnhof() {
 		this.name = "Zürich";
@@ -58,14 +58,14 @@ public class Busbahnhof {
 	}
 
 	/**
-	 * Sucht fuer den gemeldeten Flug ein passendes freies Gate
+	 * Sucht fuer die gemeldete Fahrt ein passendes freies Gate
 	 * 
 	 * Die Methode geht einfach die Liste der Gates durch und gibt das erste freie
-	 * passende Gate zurueck. Es kann daher sein, dass ein kleines Flugzeug an einem
+	 * passende Gate zurueck. Es kann daher sein, dass ein kleiner Bus an einem
 	 * grossen Gate andockt, weil dieses in der Liste zuerst gefunden wird, obwohl
 	 * auch ein freies kleines Gate vorhanden waere
 	 * 
-	 * @param flug der zu landende Flug
+	 * @param der ankommende Bus
 	 * @return das gefundene passende Gate
 	 * @throws NoGateAvailableException
 	 */

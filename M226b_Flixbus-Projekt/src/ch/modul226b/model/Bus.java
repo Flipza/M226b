@@ -1,7 +1,7 @@
 package ch.modul226b.model;
 
 /**
- * Diese Klasse modelliert ein Flugzeug
+ * Diese Klasse modelliert ein Bus
  * 
  * @author Philipp
  * @version V1.0

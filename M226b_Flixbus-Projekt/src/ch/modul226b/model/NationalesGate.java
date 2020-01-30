@@ -3,7 +3,7 @@ package ch.modul226b.model;
 /**
  * Konkrete Implementation eines nationalen Gates
  * 
- * @author ruggiero
+ * @author Philipp
  * @version V1.0
  *
  */

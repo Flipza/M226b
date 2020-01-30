@@ -3,7 +3,7 @@ package ch.modul226b.model;
 /**
  * Exception, welche angibt, dass eine ungueltige Gatenummer verlangt worden ist
  * 
- * @author ruggiero
+ * @author Philipp
  * @version V1.0
  *
  */

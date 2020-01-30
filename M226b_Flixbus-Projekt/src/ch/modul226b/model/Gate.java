@@ -9,7 +9,7 @@ package ch.modul226b.model;
  * 
  * An einem Gate werden zwar Busse parkiert, aber normalerweise spricht man von
  * Fahrt, der am Gate angeschrieben ist. Daher kennt das Gate nur die Fahrt und
- * nicht direkt das Flugzeug
+ * nicht direkt den Bus
  * 
  * @author Philipp
  * @version V1.0
@@ -24,7 +24,7 @@ public abstract class Gate {
 	private int nummer;
 
 	/**
-	 * Referenz auf den am Gate gelandeten Flug
+	 * Referenz auf den am Gate gangekommenen Bus
 	 */
 
 	private Fahrt fahrt;
@@ -41,11 +41,11 @@ public abstract class Gate {
 	}
 
 	/**
-	 * Ein Flugzeug wird gelandet, indem der Flug am Gate angeschrieben wird
+	 * Ein Bus kommt an, indem der Bus am Gate angeschrieben wird
 	 * 
 	 * @param fahrt
 	 * 
-	 * @param flug  Der Flug
+	 * @param Der Bus
 	 */
 
 	public void ankunft(Fahrt fahrt) {
@@ -53,7 +53,7 @@ public abstract class Gate {
 	}
 
 	/**
-	 * Starten heisst, dass am Gate kein Flug mehr angeschrieben ist
+	 * Abfahrt heisst, dass am Gate kein Bus mehr angeschrieben ist
 	 */
 
 	public void abfahrt() {
@@ -86,18 +86,18 @@ public abstract class Gate {
 	public abstract int getGroesse();
 
 	/**
-	 * Abfrage der Fluginfo
+	 * Abfrage der Fahrtinfo
 	 * 
-	 * @return Referenz auf den am Gate liegenden Flug, null wenn Gate nicht belegt
+	 * @return Referenz auf den am Gate stehenden Bus, null wenn Gate nicht belegt
 	 */
 	public Fahrt getFahrt() {
 		return fahrt;
 	}
 
 	/**
-	 * Abfrage des Flugzeugs am Gate.
+	 * Abfrage des Busses am Gate.
 	 * 
-	 * @return Referenz auf Flugzeug oder null, wenn Gate nicht belegt ist
+	 * @return Referenz auf Bus oder null, wenn Gate nicht belegt ist
 	 */
 	public Bus getBus() {
 		if (this.fahrt == null) {

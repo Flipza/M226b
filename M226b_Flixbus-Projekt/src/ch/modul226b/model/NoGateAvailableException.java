@@ -1,10 +1,10 @@
 package ch.modul226b.model;
 
 /**
- * Diese Exception wird geworfen, wenn beim Landen kein freies Gate gefunden
+ * Diese Exception wird geworfen, wenn bei der Ankunft kein freies Gate gefunden
  * werden kann
  * 
- * @author ruggiero
+ * @author Phillip
  * @version V1.0
  *
  */

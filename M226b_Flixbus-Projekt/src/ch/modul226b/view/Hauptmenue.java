@@ -18,7 +18,7 @@ import ch.modul226b.utils.ConsoleReader;
 public class Hauptmenue {
 
 	/**
-	 * Die main-Methode dient zum Start der Appikation. Sie instanziiert das
+	 * Die main-Methode dient zum Start der Applikation. Sie instanziert das
 	 * Hauptmenue und wertet in einer Schleife die Benutzeraktionen im Menue aus.
 	 * 
 	 * @param args Standard Kommandozeilenparameter, werden nicht weiter verwendet
@@ -34,14 +34,14 @@ public class Hauptmenue {
 	}
 
 	/**
-	 * Die Benutzerschnittstelle verwaltet diesen Flugplatz
+	 * Die Benutzerschnittstelle verwaltet diesen Busbahnhof
 	 */
 
 	private Busbahnhof busbahnhof;
 
 	/**
 	 * Konstruktor <br />
-	 * Bei der Konstruktion der Meuesteuerung wird auch gleich der Flughafen gebaut
+	 * Bei der Konstruktion der Meuesteuerung wird auch gleich der Busbahnhof erstellt
 	 */
 
 	public Hauptmenue() {
@@ -98,8 +98,8 @@ public class Hauptmenue {
 	}
 
 	/**
-	 * Der Benutzer hat "landen" gewaehlt. Diese Methode organisert die Abfrage der
-	 * Flugdaten und die Suche nach einem freien Gate
+	 * Der Benutzer hat "Ankunft" gewaehlt. Diese Methode organisert die Abfrage der
+	 * Busdaten und die Suche nach einem freien Gate
 	 */
 
 	private void ankunft() {
